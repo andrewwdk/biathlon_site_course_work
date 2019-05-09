@@ -327,6 +327,11 @@ var updateBiathlet = (date_of_birth, height, weight, career_begining, id) =>{
     });
 }
 
+var getCountryNameById = function(id){
+    var rows = getFieldsByValue('`Country`', '`country_id`', id);
+    return rows[0].name;
+}
+
 module.exports.ifLoginExists = ifLoginExists;
 module.exports.ifLoginAndPasswordCorrect = ifLoginAndPasswordCorrect;
 module.exports.insertUser = insertUser;
@@ -345,3 +350,4 @@ module.exports.ifPlaceExists = ifPlaceExists;
 module.exports.insertPlace = insertPlace;
 module.exports.getBiathletByNameAndSurname = getBiathletByNameAndSurname;
 module.exports.updateBiathlet = updateBiathlet;
+module.exports.getCountryNameById = getCountryNameById;

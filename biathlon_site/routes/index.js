@@ -271,4 +271,32 @@ router.post('/updateProfileSubmit', function(req, res){
   res.redirect('/updateProfiles');
 });
 
+router.get('/profiles', function(req, res) {
+  let html = file.readHtml('./views/findBiathlets.hbs');
+  res.render('index', { body: html({biathletDoesNotExist, notEnoughData, biathlet, biathletIsFound}), isAdmin, isAuthorized});
+  biathletDoesNotExist = false;
+  notEnoughData = false;
+  biathlet = {};
+  biathletIsFound = false;
+});
+
+router.post('/findBiathletSubmit', function(req, res){
+  if (req.body.name != '' && req.body.surname != ''){
+  var name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
+  var surname = req.body.surname.toUpperCase();
+  if(database.ifBiathletExists(name, surname)){
+    biathletIsFound = true;
+    var b = database.getBiathletByNameAndSurname(name, surname);
+    var country = database.getCountryNameById(b.country_id);
+    biathlet = {date_of_birth: b.date_of_birth, height: b.height, weight: b.weight,
+       career_begining: b.career_begining, name: b.name, surname: b.surname, country};
+  }else{
+    biathletDoesNotExist = true;
+  }
+  }else{
+    notEnoughData = true;
+  }
+  res.redirect('/profiles');
+});
+
 module.exports = router;
