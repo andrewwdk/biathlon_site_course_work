@@ -225,11 +225,15 @@ router.get('/addPlace', function(req, res) {
 });
 
 router.post('/addPlaceSubmit', function(req, res){
+if(req.body.placeName != ''){
   if(!database.ifPlaceExists(req.body.placeName.toUpperCase())){
     database.insertPlace(req.body.placeName.toUpperCase());
   }else{
     placeAlreadyExists = true;
   }
+}else{
+  notEnoughData = true;
+}
   res.redirect('/addPlace');
 });
 
