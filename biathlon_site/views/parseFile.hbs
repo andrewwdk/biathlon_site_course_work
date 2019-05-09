@@ -1,0 +1,7 @@
+<form action="parseFileSubmit" method="POST">
+    <div><h4>File</h4><input type="file" name="fileToParse"></div>
+    <div><button type="submit"> Add file</button></div>
+</form>
+{{# if raceAlreadyExists}}
+ <h2 class="error"> Race've already being added!</h2>
+{{/ if}}

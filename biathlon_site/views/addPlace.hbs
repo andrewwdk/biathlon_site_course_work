@@ -1,0 +1,10 @@
+<form action="addPlaceSubmit" method="POST">
+    <div><h4>Place name</h4><input type="text" name="placeName"></div>
+    <div><button type="submit"> Add </button></div>
+</form>
+{{# if placeAlreadyExists}}
+ <h2 class="error"> Place with such name already exists!</h2>
+{{/ if}}
+{{# if notEnoughData}}
+ <h2 class="error"> Please, fill all fields!</h2>
+{{/ if}}

@@ -1,0 +1,15 @@
+<form action="registrationSubmit" method="POST">
+    <div><h4>Login</h4><input type="text" name="login"></div>
+    <div><h4>Password</h4><input type="password" name="password"></div>
+    <div><h4>Repeat password</h4><input type="password" name="repeatedPassword"></div>
+    <div><button type="submit"> Registrate</button></div>
+</form>
+{{# if notSamePassword}}
+ <h2 class="error"> Passwords are not the same!</h2>
+{{/ if}}
+{{# if loginAlreadyExists}}
+ <h2 class="error"> User with such login already exists!</h2>
+{{/ if}}
+{{# if notEnoughData}}
+ <h2 class="error"> Please, fill all fields!</h2>
+{{/ if}}

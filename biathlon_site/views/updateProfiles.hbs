@@ -1,0 +1,23 @@
+<form action="findProfileSubmit" method="POST">
+    <div><h4>Name</h4><input type="text" name="name"></div>
+    <div><h4>Surname</h4><input type="text" name="surname"></div>
+    <div><button type="submit"> Find </button></div>
+</form>
+{{# if notEnoughData}}
+ <h2 class="error"> Please, fill all fields!</h2>
+{{/ if}}
+{{# if biathletDoesNotExist}}
+ <h2 class="error"> Biathlet with such name and surname doesn't exist!</h2>
+{{/ if}}
+
+{{# if biathletIsFound}}
+<form action="updateProfileSubmit" method="POST">
+    <input type="hidden" name="name" value={{biathlet.name}}>
+    <input type="hidden" name="surname" value={{biathlet.surname}}>
+    <div><h4>Date of birth</h4><input type="text" name="date_of_birth" value={{biathlet.date_of_birth}}></div>
+    <div><h4>Height</h4><input type="text" name="height" value={{biathlet.height}}></div>
+    <div><h4>Weight</h4><input type="text" name="weight" value={{biathlet.weight}}></div>
+    <div><h4>Career beginning</h4><input type="text" name="career_begining" value={{biathlet.career_begining}}></div>
+    <div><button type="submit"> Update </button></div>
+   </form>
+{{/ if}}
