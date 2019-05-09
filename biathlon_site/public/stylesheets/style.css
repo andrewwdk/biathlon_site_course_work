@@ -176,3 +176,51 @@ form{
 	color: white;
 	font-size: 14px;
 }
+
+.news_title{
+	position: relative;
+	top:5px;
+	left: 5px;
+	margin-bottom:5px;
+	width: 269px;
+	height: 60px;
+	background-color: #033E6B;
+	font-family: Arial, sans-serif;
+	font-size: 24px;
+	text-align: center;
+}
+.news{
+	position: relative;
+	width:280px;
+	height: 600px;
+	background-color:#66A3D2 ;
+}
+.news_list{
+	color: #033E6B;
+	margin-left:20px;
+}
+
+.questionie_title{
+	position: relative;
+	top: 5px;
+	left: 5px;
+	margin-bottom: 5px;
+	width: 269px;
+	height: 60px;
+	background-color: #033E6B;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	text-align: center;
+}
+.variant{
+	margin-left: 40px;
+	position: relative;
+}
+.text_variant{
+	color: #033E6B;
+	width: 100px;
+}
+
+.button2{
+	margin-left: 100px;
+}
