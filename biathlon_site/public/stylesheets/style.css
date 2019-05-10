@@ -5,6 +5,7 @@
 
 body{
 	margin:0;
+	background-color:  #66A3D2;
 }
 
 .header {
@@ -24,7 +25,6 @@ body{
 }
 
 .main{
-	height: 1000px;
 	width: 1290px;
 	display: inline-block;
 	vertical-align: bottom;
@@ -35,7 +35,6 @@ body{
 	margin-left:0;
 	margin-top: 0;
 	background-color: #66A3D2;
-	height: 1000px;
 	width: 300px;
 	list-style: none;
 	float: left;
@@ -67,7 +66,7 @@ a {
 	float: left;
 	position: relative;
 	width:700px;
-	height: 1000px;
+	min-height: 1000px;
 	padding-left: 10px;
 	background-color:#033E6B;
 	color: white;
@@ -83,20 +82,18 @@ h2{
 	float: left;
 	position: relative;
 	width:280px;
-	height: 1000px;
 	background-color:#66A3D2;
 	color: white;
 }
 
 .footer{
-	position: relative;
 	background-color:  #66A3D2;
-	width:690px;
+    width:690px;
 	height: 35px;
     color: white;
     font-size: 10px;
-	padding-left: 600px;
-    padding-top: 25px;
+	padding-left: 600px; 
+    padding-top: 25px; 
 }
 
 .text{
@@ -227,4 +224,31 @@ form{
 
 .race{
 	text-align: center;
+}
+
+.race_result{
+	margin-left: 70px;
+	margin-top: 50px;
+}
+th, td{
+	background: #66A3D2;
+	border: 1px solid white;
+	height: 15px;
+	text-align: center;
+	color: #033E6B;
+}
+.number{
+	width: 25px;
+}
+.flag{
+	width: 35px;
+}
+.sportsmen{
+	width: 250px;
+}
+.points{
+	width: 40px;
+}
+.time{
+	width: 60px;
 }

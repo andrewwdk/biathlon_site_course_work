@@ -19,6 +19,7 @@ let biathletDoesNotExist = false;
 let biathlet = {};
 let biathletIsFound = false;
 let races = [];
+let biathlets = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -210,7 +211,7 @@ function isCountry(value){
   var array = ['RUS', 'NOR', 'GER', 'FRA', 'UKR', 'FRA', 'CZE', 'SUI', 'SWE', 'ITA', 'CAN', 'BLR',
     'USA', 'BUL', 'CHN', 'FIN', 'EST', 'POL', 'BEL', 'ROU', 'KAZ', 'LAT', 'SRB', 'LTU', 'SVK', 'KOR',
     'JPN', 'HUN', 'GBR', 'CRO', 'GRE', 'SLO', 'ESP', 'MDA', 'MKD', 'DEN', 'BIH', 'AUS',
-    'MGL', 'BRA', 'IRL'];
+    'MGL', 'BRA', 'IRL', 'AUT'];
   if (array.indexOf(value) != -1){
     return true;
   }else{
@@ -313,5 +314,31 @@ router.get('/races', function(req, res) {
   res.render('index', { body: html({races}), isAdmin, isAuthorized});
   races = [];
 });
+
+router.get('/:id', function(req, res) {
+  let html = file.readHtml('./views/race.hbs');
+  var b = database.getBiathletsInRace(req.params.id);
+  b.forEach(el =>{
+    var biathlet = database.getBiathletById(el.biathlet_id);
+    var country = database.getCountryNameById(biathlet.country_id);
+    biathlets.push({rank: el.rank, bib: el.bib, total: el.total, time: el.time,
+      behind: el.behind, country, name: biathlet.name, surname: biathlet.surname});
+  });
+  sortByRank(biathlets);
+  res.render('index', { body: html({biathlets}), isAdmin, isAuthorized});
+  biathlets = [];
+});
+
+function sortByRank(biathlets){
+  for(var i = 0; i < biathlets.length; i++){
+    for(var j = i + 1; j < biathlets.length; j++){
+      if(biathlets[j].rank < biathlets[i].rank){
+        var temp = biathlets[i];
+        biathlets[i] = biathlets[j];
+        biathlets[j] = temp;
+      }
+    }
+  }
+}
 
 module.exports = router;

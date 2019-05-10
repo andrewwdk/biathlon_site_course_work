@@ -1,0 +1,22 @@
+<table class="race_result">
+	<tr>
+		<th class="number">rank</th>
+        <th class="number">bib</th>
+		<th class="flag"></th>
+		<th class="sportsmen">biathlet</th>
+        <th class="number">total</th>
+		<th class="time">time</th>
+        <th class="time">behind</th>
+	</tr>
+    {{# each biathlets as |biathlet key|}}
+	<tr>
+		<td class="number">{{biathlet.rank}}</td>
+        <td class="number">{{biathlet.bib}}</td>
+		<td class="flag"><img src="images/{{biathlet.country}}.jpg"></td>
+		<td class="sportsmen">{{biathlet.name}} {{biathlet.surname}}</td>
+        <th class="number">{{biathlet.total}}</th>
+		<th class="time">{{biathlet.time}}</th>
+        <th class="time">{{biathlet.behind}}</th>
+	</tr>
+    {{/ each}}
+</table>

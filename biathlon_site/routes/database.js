@@ -369,6 +369,33 @@ var getPlaceNameById = function(id){
     return rows[0].name;
 }
 
+function getBiathletsInRace(id){
+    let result = false;
+    let done = false;
+
+    connection.query("SELECT * FROM `Biathlets in races` WHERE `race_id` = '" + id + "'", (error, rows) =>{  
+        if(!!error){ 
+            console.log('Error');
+        }else{
+            console.log('Successful');
+            result = rows;
+        }
+        done = true;
+    });
+
+    while(!done)
+    {
+         deasync.runLoopOnce();
+    }
+
+    return result;
+}
+
+var getBiathletById = function(id){
+    var rows = getFieldsByValue('`Biathlets`', '`biathlet_id`', id);
+    return rows[0];
+}
+
 module.exports.ifLoginExists = ifLoginExists;
 module.exports.ifLoginAndPasswordCorrect = ifLoginAndPasswordCorrect;
 module.exports.insertUser = insertUser;
@@ -392,3 +419,5 @@ module.exports.getRaces = getRaces;
 module.exports.getRaceTypeNameById = getRaceTypeNameById;
 module.exports.getSeasonYearById = getSeasonYearById;
 module.exports.getPlaceNameById = getPlaceNameById;
+module.exports.getBiathletsInRace = getBiathletsInRace;
+module.exports.getBiathletById = getBiathletById;
