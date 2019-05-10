@@ -332,6 +332,43 @@ var getCountryNameById = function(id){
     return rows[0].name;
 }
 
+function getRaces(){
+    let result = false;
+    let done = false;
+
+    connection.query("SELECT * FROM `Races`", (error, rows) =>{  
+        if(!!error){ 
+            console.log('Error');
+        }else{
+            console.log('Successful');
+            result = rows;
+        }
+        done = true;
+    });
+
+    while(!done)
+    {
+         deasync.runLoopOnce();
+    }
+
+    return result;
+}
+
+var getRaceTypeNameById = function(id){
+    var rows = getFieldsByValue('`Kinds of races`', '`kind_of_race_id`', id);
+    return rows[0].name;
+}
+
+var getSeasonYearById = function(id){
+    var rows = getFieldsByValue('`Seasons`', '`season_id`', id);
+    return rows[0].first_year;
+}
+
+var getPlaceNameById = function(id){
+    var rows = getFieldsByValue('`Places`', '`place_id`', id);
+    return rows[0].name;
+}
+
 module.exports.ifLoginExists = ifLoginExists;
 module.exports.ifLoginAndPasswordCorrect = ifLoginAndPasswordCorrect;
 module.exports.insertUser = insertUser;
@@ -351,3 +388,7 @@ module.exports.insertPlace = insertPlace;
 module.exports.getBiathletByNameAndSurname = getBiathletByNameAndSurname;
 module.exports.updateBiathlet = updateBiathlet;
 module.exports.getCountryNameById = getCountryNameById;
+module.exports.getRaces = getRaces;
+module.exports.getRaceTypeNameById = getRaceTypeNameById;
+module.exports.getSeasonYearById = getSeasonYearById;
+module.exports.getPlaceNameById = getPlaceNameById;

@@ -18,6 +18,7 @@ let placeAlreadyExists = false;
 let biathletDoesNotExist = false;
 let biathlet = {};
 let biathletIsFound = false;
+let races = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -297,6 +298,20 @@ router.post('/findBiathletSubmit', function(req, res){
     notEnoughData = true;
   }
   res.redirect('/profiles');
+});
+
+router.get('/races', function(req, res) {
+  let html = file.readHtml('./views/races.hbs');
+  let r = database.getRaces();
+  r.forEach(el => {
+    var raceKind = database.getRaceTypeNameById(el.kind_of_race_id);
+    var year = database.getSeasonYearById(el.season_id);
+    var place = database.getPlaceNameById(el.place_id);
+    var name = place + ' ' + raceKind + ' ' + year + '/' + (year+1);
+    races.push({name: name, id: el.race_id});
+  });
+  res.render('index', { body: html({races}), isAdmin, isAuthorized});
+  races = [];
 });
 
 module.exports = router;
