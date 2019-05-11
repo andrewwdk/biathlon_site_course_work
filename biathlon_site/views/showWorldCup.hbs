@@ -1,0 +1,16 @@
+<table class="world_cup">
+	<tr>
+		<th class="number">#</th>
+		<th class="flag"></th>
+		<th class="sportsmen">biathlet</th>
+        <th class="points">points</th>
+	</tr>
+    {{# each biathlets as |biathlet key|}}
+	<tr>
+		<td class="number">{{biathlet.index}}</td>
+		<td class="flag"><img src="/images/{{biathlet.country}}.jpg"></td>
+		<td class="sportsmen">{{biathlet.name}} {{biathlet.surname}}</td>
+        <th class="points">{{biathlet.points}}</th>
+	</tr>
+    {{/ each}}
+</table>

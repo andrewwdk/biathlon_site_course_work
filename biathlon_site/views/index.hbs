@@ -1,17 +1,19 @@
 <aside class="menu">
-	<li class="element"> <a  href="main">  <div class="vert_text"> Main</div></a></li>
+	<li class="element"> <a  href="/main">  <div class="vert_text"> Main</div></a></li>
     {{# if isAuthorized}}
-    <li class="element"> <a  href="logout">  <div class="vert_text"> Log out</div></a></li>
+    <li class="element"> <a  href="/logout">  <div class="vert_text"> Log out</div></a></li>
     {{ else }}
-    <li class="element"> <a  href="authorization">  <div class="vert_text"> Authorization</div></a></li>
-    <li class="element"> <a  href="registration">  <div class="vert_text"> Registration</div></a></li>
+    <li class="element"> <a  href="/authorization">  <div class="vert_text"> Authorization</div></a></li>
+    <li class="element"> <a  href="/registration">  <div class="vert_text"> Registration</div></a></li>
     {{/ if }}
-    <li class="element"> <a  href="profiles">  <div class="vert_text"> Profiles</div></a></li>
-	<li class="element"> <a  href="races">  <div class="vert_text"> Races</div></a></li>
+    <li class="element"> <a  href="/profiles">  <div class="vert_text"> Profiles</div></a></li>
+	<li class="element"> <a  href="/races">  <div class="vert_text"> Races</div></a></li>
+	<li class="element"> <a  href="/womenWorldCup">  <div class="vert_text"> Woman Cup</div></a></li>
+	<li class="element"> <a  href="/menWorldCup">  <div class="vert_text"> Man Cup</div></a></li>
     {{# if isAdmin}}
-    <li class="element"> <a  href="parseFile">  <div class="vert_text"> Add file</div></a></li>
-    <li class="element"> <a  href="addPlace">  <div class="vert_text"> Add place</div></a></li>
-    <li class="element"> <a  href="updateProfiles">  <div class="vert_text"> Update profiles</div></a></li>
+    <li class="element"> <a  href="/parseFile">  <div class="vert_text"> Add file</div></a></li>
+    <li class="element"> <a  href="/addPlace">  <div class="vert_text"> Add place</div></a></li>
+    <li class="element"> <a  href="/updateProfiles">  <div class="vert_text"> Update profiles</div></a></li>
     {{/ if }}
 </aside>
 <div class="main_part">

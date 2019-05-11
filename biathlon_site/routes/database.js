@@ -396,6 +396,78 @@ var getBiathletById = function(id){
     return rows[0];
 }
 
+function getSeasons(){
+    let result = false;
+    let done = false;
+
+    connection.query("SELECT * FROM `Seasons`", (error, rows) =>{  
+        if(!!error){ 
+            console.log('Error');
+        }else{
+            console.log('Successful');
+            result = rows;
+        }
+        done = true;
+    });
+
+    while(!done)
+    {
+         deasync.runLoopOnce();
+    }
+
+    return result;
+}
+
+var getUniqueBiathletsBySeasonAndId = (sex, season_id) =>{
+    var sql = "CALL `getDistinctBiathletsBySexAndSesonId`(?, ?)";
+
+    let toinsert = [sex, season_id];
+    let result;
+    let done = false;
+
+    connection.query(sql, toinsert, (error, rows) =>{
+        if(!!error){ 
+            console.log(error);
+        }else{
+            console.log('Successful');
+            result = rows;
+        }
+        done = true;
+    });
+
+    while(!done)
+    {
+         deasync.runLoopOnce();
+    }
+
+    return result[0];
+}
+
+var getBiathletPlacesBySeasonIdAndBiathletID = (biathlet_id, season_id) =>{
+    var sql = "CALL `getBiathletPlacesBySeasonIdAndBiathletID`(?, ?)";
+
+    let toinsert = [biathlet_id, season_id];
+    let result;
+    let done = false;
+
+    connection.query(sql, toinsert, (error, rows) =>{
+        if(!!error){ 
+            console.log(error);
+        }else{
+            console.log('Successful');
+            result = rows;
+        }
+        done = true;
+    });
+
+    while(!done)
+    {
+         deasync.runLoopOnce();
+    }
+
+    return result[0];
+}
+
 module.exports.ifLoginExists = ifLoginExists;
 module.exports.ifLoginAndPasswordCorrect = ifLoginAndPasswordCorrect;
 module.exports.insertUser = insertUser;
@@ -421,3 +493,6 @@ module.exports.getSeasonYearById = getSeasonYearById;
 module.exports.getPlaceNameById = getPlaceNameById;
 module.exports.getBiathletsInRace = getBiathletsInRace;
 module.exports.getBiathletById = getBiathletById;
+module.exports.getSeasons = getSeasons;
+module.exports.getUniqueBiathletsBySeasonAndId = getUniqueBiathletsBySeasonAndId;
+module.exports.getBiathletPlacesBySeasonIdAndBiathletID = getBiathletPlacesBySeasonIdAndBiathletID;

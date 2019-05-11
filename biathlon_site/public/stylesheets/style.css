@@ -1,6 +1,7 @@
 .content {
 	padding: 0;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 body{
@@ -251,4 +252,9 @@ th, td{
 }
 .time{
 	width: 60px;
+}
+
+.world_cup{
+	margin-left: 150px;
+	margin-top: 50px;
 }

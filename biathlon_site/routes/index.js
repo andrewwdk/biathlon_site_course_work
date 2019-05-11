@@ -19,6 +19,7 @@ let biathletDoesNotExist = false;
 let biathlet = {};
 let biathletIsFound = false;
 let races = [];
+let seasons = [];
 let biathlets = [];
 
 /* GET home page. */
@@ -315,7 +316,7 @@ router.get('/races', function(req, res) {
   races = [];
 });
 
-router.get('/:id', function(req, res) {
+router.get('/races/:id', function(req, res) {
   let html = file.readHtml('./views/race.hbs');
   var b = database.getBiathletsInRace(req.params.id);
   b.forEach(el =>{
@@ -336,6 +337,78 @@ function sortByRank(biathlets){
         var temp = biathlets[i];
         biathlets[i] = biathlets[j];
         biathlets[j] = temp;
+      }
+    }
+  }
+}
+
+router.get('/womenWorldCup', function(req, res) {
+  let html = file.readHtml('./views/seasons.hbs');
+  let r = database.getSeasons();
+  r.forEach(el => {
+    var name = el.first_year + '/' + (el.first_year + 1);
+    seasons.push({name, id: el.season_id, sex: 'woman'});
+  });
+  res.render('index', { body: html({seasons}), isAdmin, isAuthorized});
+  seasons = [];
+});
+
+router.get('/menWorldCup', function(req, res) {
+  let html = file.readHtml('./views/seasons.hbs');
+  let r = database.getSeasons();
+  r.forEach(el => {
+    var name = el.first_year + '/' + (el.first_year + 1);
+    seasons.push({name, id: el.season_id, sex: 'man'});
+  });
+  res.render('index', { body: html({seasons}), isAdmin, isAuthorized});
+  seasons = [];
+});
+
+router.get('/seasons/:sex/:id', function(req, res) {
+  let html = file.readHtml('./views/showWorldCup.hbs');
+  var sex = req.params.sex;
+  var season_id = req.params.id;
+  var b = database.getUniqueBiathletsBySeasonAndId(sex, season_id);
+  var index = 1;
+  b.forEach(el =>{
+    var ranks = database.getBiathletPlacesBySeasonIdAndBiathletID(el.biathlet_id, season_id);
+    var points = calculatePoints(ranks);
+    if(points>0){
+      var biathlet = database.getBiathletById(el.biathlet_id);
+      var country = database.getCountryNameById(biathlet.country_id);
+      biathlets.push({index, points, country, name: biathlet.name, surname: biathlet.surname});
+      index++;
+    }
+  });
+  sortByPoints(biathlets);
+  res.render('index', { body: html({biathlets}), isAdmin, isAuthorized});
+  biathlets = [];
+});
+
+function calculatePoints(ranks){
+  var sum = 0;
+  var points = [60, 54, 48, 43, 40, 38, 36, 34, 32, 31, 30, 29, 28, 27, 26, 25, 24,
+    23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+  ranks.forEach(rank=>{
+    if(rank.rank < 41){
+      sum+=points[rank.rank - 1];
+    }
+  });
+
+  return sum;
+}
+
+function sortByPoints(biathlets){
+  for(var i = 0; i < biathlets.length; i++){
+    for(var j = i + 1; j < biathlets.length; j++){
+      if(biathlets[j].points > biathlets[i].points){
+        var temp = biathlets[i];
+        biathlets[i] = biathlets[j];
+        biathlets[j] = temp;
+        var temp = biathlets[i].index;
+        biathlets[i].index = biathlets[j].index;
+        biathlets[j].index = temp;
       }
     }
   }
