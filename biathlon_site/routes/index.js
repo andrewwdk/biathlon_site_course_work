@@ -257,7 +257,10 @@ router.post('/findProfileSubmit', function(req, res){
     biathletIsFound = true;
     var b = database.getBiathletByNameAndSurname(name, surname);
     biathlet = {date_of_birth: b.date_of_birth, height: b.height, weight: b.weight,
-       career_begining: b.career_begining, name: b.name, surname: b.surname};
+       career_begining: b.career_begining, name: b.name, surname: b.surname, rifle: b.rifle, 
+       skis: b.skis, poles: b.poles, glooves: b.glooves, glasses: b.glasses, 
+       first_year_in_team: b.first_year_in_team, coaches: b.coaches, hobbies: b.hobbies,
+       place_of_birth: b.place_of_birth};
   }else{
     biathletDoesNotExist = true;
   }
@@ -270,7 +273,9 @@ router.post('/findProfileSubmit', function(req, res){
 router.post('/updateProfileSubmit', function(req, res){
   var biathletId = database.getBiathletIdByNameAndSurname(req.body.name, req.body.surname);
   database.updateBiathlet(req.body.date_of_birth, req.body.height, req.body.weight, 
-    req.body.career_begining, biathletId);
+    req.body.career_begining, biathletId, req.body.rifle, req.body.skis, req.body.poles,
+    req.body.glooves, req.body.glasses, req.body.first_year_in_team, req.body.coaches, req.body.hobbies,
+    req.body.place_of_birth);
   res.redirect('/updateProfiles');
 });
 
@@ -292,7 +297,10 @@ router.post('/findBiathletSubmit', function(req, res){
     var b = database.getBiathletByNameAndSurname(name, surname);
     var country = database.getCountryNameById(b.country_id);
     biathlet = {date_of_birth: b.date_of_birth, height: b.height, weight: b.weight,
-       career_begining: b.career_begining, name: b.name, surname: b.surname, country};
+       career_begining: b.career_begining, name: b.name, surname: b.surname, country, rifle: b.rifle, 
+       skis: b.skis, poles: b.poles, glooves: b.glooves, glasses: b.glasses, 
+       first_year_in_team: b.first_year_in_team, coaches: b.coaches, hobbies: b.hobbies,
+       place_of_birth: b.place_of_birth};
   }else{
     biathletDoesNotExist = true;
   }

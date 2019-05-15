@@ -300,8 +300,10 @@ function getBiathletByNameAndSurname(name, surname){
     return result;
 }
 
-var updateBiathlet = (date_of_birth, height, weight, career_begining, id) =>{
-    var sql = "UPDATE `Biathlets` SET `date_of_birth` = ?, `height` = ?, `weight` = ?, `career_begining` = ? WHERE `biathlet_id` = ?";
+var updateBiathlet = (date_of_birth, height, weight, career_begining, id, rifle, skis, poles,
+    glooves, glasses, first_year_in_team, coaches, hobbies, place_of_birth) =>{
+    var sql = "UPDATE `Biathlets` SET `date_of_birth` = ?, `height` = ?, `weight` = ?, `career_begining` = ?, " +
+    "`rifle` = ?, `skis` = ?, `poles` = ?, `glooves` = ?, `glasses` = ?, `first_year_in_team` = ?, `coaches` = ?, `hobbies` = ?, `place_of_birth` = ?  WHERE `biathlet_id` = ?";
 
     if(date_of_birth == ''){
         date_of_birth = null;
@@ -315,8 +317,12 @@ var updateBiathlet = (date_of_birth, height, weight, career_begining, id) =>{
     if(career_begining == ''){
         career_begining = null;
     }
+    if(first_year_in_team == ''){
+        first_year_in_team = null;
+    }
 
-    let toinsert = [date_of_birth, height, weight, career_begining, id];
+    let toinsert = [date_of_birth, height, weight, career_begining, rifle, skis, poles,
+        glooves, glasses, first_year_in_team, coaches, hobbies, place_of_birth, id];
 
     connection.query(sql, toinsert, (error) =>{
         if(!!error){ 
